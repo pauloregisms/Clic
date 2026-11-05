@@ -860,3 +860,9 @@ Fontes principais:
 - [wcwidth: largura em colunas na documentação Linux](https://man7.org/linux/man-pages/man3/wcwidth.3.html).
 
 Ao atualizar a biblioteca, revise especialmente a assinatura das funções, o tratamento das teclas e as observações sobre tabelas antes de reutilizar esta documentação como referência de uma nova versão.
+
+## Comunicação em rede e testes
+
+A extensão TCP/IPv4, descoberta UDP, exemplos e contratos de recebimento estão em
+[README_REDE.md](README_REDE.md). Use `make test` para a suíte unitária e de integração
+local, e `make test-sanitize` para executar a mesma suíte com ASan e UBSan.
