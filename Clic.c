@@ -9,6 +9,12 @@
 #include <limits.h>
 #include <wchar.h>
 
+/**
+ * Calcula a largura em caracteres de uma string de texto dada, considerando caracteres multibyte.
+ * Essa função converte cada caractere multibyte na entrada para sua representação correspondente em caracteres largos
+ * e soma a largura de cada caractere largo usando wcwidth().
+ * Retorna a largura total em colunas, ou -1 caso ocorra um erro durante a conversão.
+ */
 int Clic_textWidth(const char *text) {
     if (!text) return -1;
 
@@ -34,7 +40,7 @@ int Clic_textWidth(const char *text) {
     return width;
 }
 
-/* Keep complete multibyte characters, including trailing zero-width marks. */
+/** Mantém caracteres multibyte completos, incluindo marcas de zero largura que podem aparecer no final. */
 static size_t Text_prefix(const char *text, int maxWidth, int *width) {
     mbstate_t state = {0};
     size_t remaining = strlen(text);
@@ -236,6 +242,13 @@ int Clic_printCenter(char *text) {
     return column;
 }
 
+void Clic_printScreenBox() {
+    int width = Clic_getScreenWidth();
+    int height = Clic_getScreenHeight();
+
+    Clic_clearScreen();
+    Clic_printBox(width, height);
+}
 
 void Clic_setBufferOn() {
     struct termios t;
@@ -437,7 +450,7 @@ Table *Table_create(char *format) {
 	
 	if (!setlocale(LC_CTYPE, "") || Clic_textWidth("Ação") != 4) {
         fprintf(stderr, "Error: Table_create: Configure uma localidade UTF-8 antes de executar.\n");
-        return 1;
+        return NULL;
     }
 	
 	if (format == NULL) {

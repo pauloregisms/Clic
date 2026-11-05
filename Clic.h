@@ -69,7 +69,7 @@ enum Key {
 	Key_DOWN = 66,
 	Key_RIGHT = 67,
 	Key_LEFT = 68,
-	Key_DELETE = 127
+	Key_DELETE = 127,
 	Key_0 = 48, Key_1 = 49,
 	Key_2 = 50, Key_3 = 51,
 	Key_4 = 52, Key_5 = 53,
@@ -232,6 +232,10 @@ void Clic_printSymbol(char *symbol);
 
 // Operações auxiliares de posicionamento de texto -----------------------------
 
+/** @brief Retorna a largura do texto em colunas do terminal, ou -1 se o texto for nulo ou inválido na localidade atual.
+ * */
+int Clic_textWidth(const char *text);
+
 /** @brief Centraliza o texto na linha atual e retorna a coluna inicial, ou 0 em caso de falha. 
  * */
 int Clic_printCenter(char *text);
@@ -255,6 +259,10 @@ int Clic_getScreenHeight();
 /** @brief Desenha uma caixa a partir do cursor, incluindo as bordas nas dimensões. 
  * */
 void Clic_printBox(int width, int height);
+
+/** @brief Desenha uma caixa do tamanho da tela. 
+ * */
+void Clic_printScreenBox();
 
 // Captura de teclas e manipulação de execução ---------------------------------
 
